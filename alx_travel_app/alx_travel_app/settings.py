@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
+
+CHAPA_SECRET_KEY = config("CHAPA_SECRET_KEY")
+APPEND_SLASH = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,7 +149,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Broker settings
-CELERY_BROKER_URL = 'amqp://sammking:passdem@localhost:5672/myvhost'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'rpc://'
 # Other settings
 CELERY_ACCEPT_CONTENT = ['json']
